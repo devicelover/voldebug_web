@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /Admin/
+Disallow: /includes/
+Disallow: /backups/
+Disallow: /cron/
+Disallow: /vendor/
+
+Sitemap: https://voldebug.in/sitemap.xml
