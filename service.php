@@ -68,15 +68,13 @@
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Services</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Web development, mobile apps, cybersecurity, AI and CCTV — delivered end-to-end by an experienced Vadodara studio.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -107,7 +105,7 @@
 				<div class="col-lg-4 col-xl-4 col-md-6 mb-4">
 					<div class="service__single">
 						<div class="service__single--box">
-							<div class="icon"><img src="Admin/images/service_images/<?php echo $row['image'] ?>" alt=""></div>
+							<div class="icon"><img loading="lazy" src="Admin/images/service_images/<?php echo $row['image'] ?>" alt=""></div>
 							<div class="service__single--box-meta">
 								<div class="meta-text">
 									<!-- <a href="#">Web Design</a> -->
@@ -164,7 +162,7 @@
 				<div class="col-lg-4 col-xl-4">
 					<div class="faq__image">
 						<div class="faq__image-img">
-							<img src="assets/img/faq.jpg" alt="faq">
+							<img loading="lazy" src="assets/img/faq.jpg" alt="faq">
 						</div>
 					</div>
 				</div>

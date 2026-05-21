@@ -97,8 +97,9 @@
                         <span>SEO / Marketing</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="hr_seo_leads.php">All Leads</a></li>
+                        <li><a href="hr_seo_leads.php">All SEO Leads</a></li>
                         <li><a href="hr_seo_edit.php">+ Add Lead</a></li>
+                        <li><a href="hr_newsletter.php">Newsletter Subscribers</a></li>
                     </ul>
                 </li>
 

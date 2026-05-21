@@ -66,15 +66,13 @@
 	<div class="breadcrumb pt-80 pb-80">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Blog Left Sidebar</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Voldebug blog — case studies, advisories and engineering notes.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -98,7 +96,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-1.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-1.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -106,7 +104,7 @@
 											for marketing materials</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-1.jpg" alt="author">
+												<img loading="lazy" src="assets/img/author/author-1.jpg" alt="author">
 												<a href="#">Jessica</a>
 											</div>
 											<div class="date">
@@ -121,7 +119,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-1-2.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-1-2.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -129,7 +127,7 @@
 											virtual reality and high-quality graphics</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-2.jpg" alt="">
+												<img loading="lazy" src="assets/img/author/author-2.jpg" alt="">
 												<a href="#">Shishir Ahmed</a>
 											</div>
 											<div class="date">
@@ -144,7 +142,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-1-3.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-1-3.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -152,7 +150,7 @@
 											and their impact on quality</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-3.jpg" alt="">
+												<img loading="lazy" src="assets/img/author/author-3.jpg" alt="">
 												<a href="#">Imrazina</a>
 											</div>
 											<div class="date">
@@ -168,7 +166,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-2-1.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-2-1.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -177,7 +175,7 @@
 											Interfaces</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-1.jpg" alt="author">
+												<img loading="lazy" src="assets/img/author/author-1.jpg" alt="author">
 												<a href="#">Ma Jessia</a>
 											</div>
 											<div class="date">
@@ -192,7 +190,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-2-2.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-2-2.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -200,7 +198,7 @@
 											Emphasizing the Detail and Precision in Every Pixel</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-2.jpg" alt="">
+												<img loading="lazy" src="assets/img/author/author-2.jpg" alt="">
 												<a href="#">Peter Jhonson</a>
 											</div>
 											<div class="date">
@@ -215,7 +213,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-2-3.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-2-3.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -223,7 +221,7 @@
 											Highlighting My Dedication to Optimal User Experiences</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-1.jpg" alt="">
+												<img loading="lazy" src="assets/img/author/author-1.jpg" alt="">
 												<a href="#">Michael Jorin</a>
 											</div>
 											<div class="date">
@@ -239,7 +237,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-4-2.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-4-2.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -247,7 +245,7 @@
 											Diving into the Code and Technologies That Power Them</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-2.jpg" alt="author">
+												<img loading="lazy" src="assets/img/author/author-2.jpg" alt="author">
 												<a href="#">Maria Kristina</a>
 											</div>
 											<div class="date">
@@ -262,7 +260,7 @@
 							<div class="blog__single">
 								<div class="blog__single--box">
 									<a href="blog-details.html" class="blog-img">
-										<img src="assets/img/blog/blog-three-2.jpg" alt="blog-1">
+										<img loading="lazy" src="assets/img/blog/blog-three-2.jpg" alt="blog-1">
 										<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 									</a>
 									<div class="blog__single--meta">
@@ -270,7 +268,7 @@
 											Development - A Detailed Exhibition of My Coding Endeavors and Solutions</a>
 										<div class="author-date">
 											<div class="author">
-												<img src="assets/img/author/author-3.jpg" alt="">
+												<img loading="lazy" src="assets/img/author/author-3.jpg" alt="">
 												<a href="#">Hadi</a>
 											</div>
 											<div class="date">
@@ -334,7 +332,7 @@
 										</div>
 										<div class="blog-img">
 											<a href="blog-details.html">
-												<img src="assets/img/blog/blog-1.jpg" alt="">
+												<img loading="lazy" src="assets/img/blog/blog-1.jpg" alt="">
 											</a>
 										</div>
 									</div>
@@ -347,7 +345,7 @@
 										</div>
 										<div class="blog-img">
 											<a href="blog-details.html">
-												<img src="assets/img/blog/blog-1-2.jpg" alt="">
+												<img loading="lazy" src="assets/img/blog/blog-1-2.jpg" alt="">
 											</a>
 										</div>
 									</div>
@@ -360,7 +358,7 @@
 										</div>
 										<div class="blog-img">
 											<a href="blog-details.html">
-												<img src="assets/img/blog/blog-1-3.jpg" alt="">
+												<img loading="lazy" src="assets/img/blog/blog-1-3.jpg" alt="">
 											</a>
 										</div>
 									</div>

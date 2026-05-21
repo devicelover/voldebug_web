@@ -67,15 +67,13 @@
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">About Us</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Voldebug Innovations builds digital products and trains the next generation of engineers — from Vadodara, for clients worldwide.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -96,17 +94,17 @@
 				<div class="about__small d-md-block d-lg-none mb-50">
 					<div class="about__small--img">
 						<div class="about__wrapper--vector">
-							<img src="assets/img/animated-icon/graph.png" alt="">
-							<img src="assets/img/animated-icon/star-icon.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="">
 						</div>
 						<div class="about-img">
-							<img data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717475710.jpg" alt="design" title="Design Team">
-							<img data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1718785219.jpg" alt="reasearch" title="Reasearch Team">
-							<img data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717478315.jpg" alt="marketing team" title="Marketing Team">
-							<img data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="image/2.png" alt="developer team" title="Developer Team">
 						</div>
 					</div>
@@ -131,18 +129,18 @@
 
 					<div class="about__wrapper--img d-none d-lg-block">
 						<div class="about__wrapper--vector">
-							<img src="assets/img/animated-icon/graph.png" alt="">
-							<img src="assets/img/animated-icon/star-icon.png" alt="">
-							<img src="assets/img/animated-icon/star.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star.png" alt="">
 						</div>
 						<div class="about-img">
-							<img data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717475710.jpg" alt="design" title="Design Team">
-							<img data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1718785219.jpg" alt="reasearch" title="Reasearch Team">
-							<img data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717478315.jpg" alt="marketing team" title="Marketing Team">
-							<img data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="image/2.png" alt="developer team" title="Developer Team">
 						</div>
 					</div>
@@ -182,7 +180,7 @@
 					<div class="testimonial__left">
 						<div class="pagination__dots"></div>
 						<div class="image">
-							<img src="assets/img/testimonial/testimonial-two.jpg" alt="">
+							<img loading="lazy" src="assets/img/testimonial/testimonial-two.jpg" alt="">
 						</div>
 					</div>
 				</div>
@@ -200,7 +198,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -208,7 +206,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Savanna Nguyen
@@ -228,7 +226,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -236,7 +234,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Savanna Nguyen
@@ -256,7 +254,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -264,7 +262,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Savanna Nguyen

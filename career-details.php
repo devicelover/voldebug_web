@@ -94,15 +94,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 	<div class="breadcrumb pt-80 pb-80">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Career</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Apply for a role at Voldebug. We reply to every application within 5 working days.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">

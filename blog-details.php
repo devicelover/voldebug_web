@@ -83,8 +83,8 @@ if (isset($_GET['id'])) {
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
@@ -109,7 +109,7 @@ if (isset($_GET['id'])) {
 				<div class="col-8 service-details__text--content">
 				<h3><span><?php echo $service['title']; ?></span></h3>
 				<div class="service-details__img">
-					<img src="Admin/images/blog_images/<?php echo $service['main_img'] ?>" alt="">
+					<img loading="lazy" src="Admin/images/blog_images/<?php echo $service['main_img'] ?>" alt="">
 				</div>
 				<p><?php echo $service['description']; ?></p>
 				</div>

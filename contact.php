@@ -68,15 +68,13 @@
 	<div class="breadcrumb pt-80 pb-80">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Contact Us</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Reach the Voldebug team in Vadodara. Cybersecurity, web, mobile, AI — usually a 24-hour response.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">

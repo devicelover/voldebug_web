@@ -66,15 +66,13 @@
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Blog</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Writing on cybersecurity, AI, and modern web development — by the Voldebug team.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -105,14 +103,14 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.php?id=<?php echo $row['id']; ?>" class="blog-img">
-								<img src="Admin/images/blog_images/<?php echo $row['main_img'] ?>" alt="blog-1">
+								<img loading="lazy" src="Admin/images/blog_images/<?php echo $row['main_img'] ?>" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
 								<a href="blog-details.php?id=<?php echo $row['id']; ?>" class="blog--title"><?php echo $row["title"] ?></a>
 								<div class="author-date">
 									<div class="author">
-										<!-- <img src="assets/img/author/author-1.jpg" alt="author"> -->
+										<!-- <img loading="lazy" src="assets/img/author/author-1.jpg" alt="author"> -->
 										<a href="blog-details.php?id=<?php echo $row['id']; ?>"><?php echo $row["client_name"] ?></a>
 									</div>
 									<div class="date">
@@ -128,7 +126,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-1-2.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-1-2.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -136,7 +134,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									virtual reality and high-quality graphics</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-2.jpg" alt="">
+										<img loading="lazy" src="assets/img/author/author-2.jpg" alt="">
 										<a href="#">Shishir Ahmed</a>
 									</div>
 									<div class="date">
@@ -151,7 +149,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-1-3.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-1-3.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -159,7 +157,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									and their impact on quality</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-3.jpg" alt="">
+										<img loading="lazy" src="assets/img/author/author-3.jpg" alt="">
 										<a href="#">Imrazina</a>
 									</div>
 									<div class="date">
@@ -175,7 +173,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-2-1.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-2-1.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -184,7 +182,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									Interfaces</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-2.jpg" alt="author">
+										<img loading="lazy" src="assets/img/author/author-2.jpg" alt="author">
 										<a href="#">Ma Jessia</a>
 									</div>
 									<div class="date">
@@ -199,7 +197,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-2-2.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-2-2.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -207,7 +205,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									Emphasizing the Detail and Precision in Every Pixel</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-3.jpg" alt="">
+										<img loading="lazy" src="assets/img/author/author-3.jpg" alt="">
 										<a href="#">Peter Jhonson</a>
 									</div>
 									<div class="date">
@@ -222,7 +220,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-2-3.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-2-3.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -230,7 +228,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									Highlighting My Dedication to Optimal User Experiences</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-1.jpg" alt="">
+										<img loading="lazy" src="assets/img/author/author-1.jpg" alt="">
 										<a href="#">Michael Jorin</a>
 									</div>
 									<div class="date">
@@ -246,7 +244,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-4-2.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-4-2.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -254,7 +252,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									Diving into the Code and Technologies That Power Them</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-2.jpg" alt="author">
+										<img loading="lazy" src="assets/img/author/author-2.jpg" alt="author">
 										<a href="#">Maria Kristina</a>
 									</div>
 									<div class="date">
@@ -269,7 +267,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-three-2.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-three-2.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -277,7 +275,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									Development - A Detailed Exhibition of My Coding Endeavors and Solutions</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-3.jpg" alt="">
+										<img loading="lazy" src="assets/img/author/author-3.jpg" alt="">
 										<a href="#">Hadi</a>
 									</div>
 									<div class="date">
@@ -292,7 +290,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog-details.html" class="blog-img">
-								<img src="assets/img/blog/blog-4-1.jpg" alt="blog-1">
+								<img loading="lazy" src="assets/img/blog/blog-4-1.jpg" alt="blog-1">
 								<span class="link-btn"><i class="fa-sharp fa-light fa-arrow-right-long"></i></span>
 							</a>
 							<div class="blog__single--meta">
@@ -300,7 +298,7 @@ while ($row = mysqli_fetch_assoc($blog)) {
 									Endeavors, Illustrating the Evolution of My Digital Creations</a>
 								<div class="author-date">
 									<div class="author">
-										<img src="assets/img/author/author-1.jpg" alt="">
+										<img loading="lazy" src="assets/img/author/author-1.jpg" alt="">
 										<a href="#">Towkib</a>
 									</div>
 									<div class="date">

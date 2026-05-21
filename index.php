@@ -78,26 +78,26 @@
 								<div class="hero__text--content relative">
 									<h2>
 										Tech That Makes You <em>Smarter</em>
-									<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+									<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 
 									</h2>
 									<p>Voldebug Innovations Pvt. Ltd is a company that specializes in providing high-quality
 										 web development and mobile app development solutions for businesses of all sizes. 
 										 Our mission is to help our clients achieve their online goals by delivering innovative and user-friendly 
 										 websites and applications that are tailored to their unique needs and preferences.</p>
-									<img src="assets/img/animated-icon/star-icon.png" alt="graph">
-							<img src="assets/img/animated-icon/star.png" alt="">
+									<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
+							<img loading="lazy" src="assets/img/animated-icon/star.png" alt="">
 
 
 								</div>
 							</div>
 							<!-- <div class="col-lg-1"></div> -->
 							<div class="col-lg-5 hero__image">
-							<img src="assets/img/animated-icon/star-icon.png" alt="graph">
-							<img src="assets/img/animated-icon/star.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
+							<img loading="lazy" src="assets/img/animated-icon/star.png" alt="">
 							
-							<img src="image/Voldebug.png" width="500px" alt="graph">
-								<!-- <img src="assets/img/animated-icon/graph.png" alt="graph"> -->
+							<img loading="lazy" src="image/Voldebug.png" width="500px" alt="graph">
+								<!-- <img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph"> -->
 								
 							</div>
 						</div>
@@ -124,7 +124,7 @@
 					while ($row = mysqli_fetch_assoc($gallery)) {
                 ?>
 						<div class="slider__single">
-							<img src="Admin/images/gallery/<?php echo $row['image']; ?>"
+							<img loading="lazy" src="Admin/images/gallery/<?php echo $row['image']; ?>"
 								alt="slider">
 						</div>
 				<?php } ?>
@@ -141,56 +141,56 @@
 		<div class="information__wrapper animated-marque">
 			<div class="information__content">
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6>OPen Hours: <span>SUN - Mon</span>: 9am - 6pm, Thursday: 9am - 5pm, Friday: <span>Closed</span>
 					</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Office:- </span>Horinaraonpur Road, Harinarayanpur, Kushtia, Bangladesh</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Get in touch:- </span>Phone: +8801925202096</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Email:- </span>contact@insomniacafe.org</h6>
 				</div>
 
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6>OPen Hours: <span>SUN - Mon</span>: 9am - 6pm, Thursday: 9am - 5pm, Friday: <span>Closed</span>
 					</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Office:- </span>Horinaraonpur Road, Harinarayanpur, Kushtia, Bangladesh</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Get in touch:- </span>Phone: +8801925202096</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Email:- </span>contact@insomniacafe.org</h6>
 				</div>
 
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6>OPen Hours: <span>SUN - Mon</span>: 9am - 6pm, Thursday: 9am - 5pm, Friday: <span>Closed</span>
 					</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Office:- </span>Horinaraonpur Road, Harinarayanpur, Kushtia, Bangladesh</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Get in touch:- </span>Phone: +8801925202096</h6>
 				</div>
 				<div class="single-information">
-					<div class="icon"><img src="assets/img/animated-icon/star.png" alt="star"></div>
+					<div class="icon"><img loading="lazy" src="assets/img/animated-icon/star.png" alt="star"></div>
 					<h6> <span>Email:- </span>contact@insomniacafe.org</h6>
 				</div>
 			</div>
@@ -205,17 +205,17 @@
 				<div class="about__small d-md-block d-lg-none mb-50">
 					<div class="about__small--img">
 						<div class="about__wrapper--vector">
-							<img src="assets/img/animated-icon/graph.png" alt="">
-							<img src="assets/img/animated-icon/star-icon.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="">
 						</div>
 						<div class="about-img">
-						<img data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+						<img loading="lazy" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717475710.jpg" alt="design" title="Design Team">
-							<img data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1718785219.jpg" alt="reasearch" title="Reasearch Team">
-							<img data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717478315.jpg" alt="marketing team" title="Marketing Team">
-							<img data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="image/2.png" alt="developer team" title="Developer Team">
 						</div>
 					</div>
@@ -239,18 +239,18 @@
 
 					<div class="about__wrapper--img d-none d-lg-block">
 						<div class="about__wrapper--vector">
-							<img src="assets/img/animated-icon/graph.png" alt="">
-							<img src="assets/img/animated-icon/star-icon.png" alt="">
-							<img src="assets/img/animated-icon/star.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="">
+							<img loading="lazy" src="assets/img/animated-icon/star.png" alt="">
 						</div>
 						<div class="about-img">
-							<img data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717475710.jpg" alt="design" title="Design Team">
-							<img data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="slide-down" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1718785219.jpg" alt="reasearch" title="Reasearch Team">
-							<img data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="flip-left" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="Admin/images/gallery/1717478315.jpg" alt="marketing team" title="Marketing Team">
-							<img data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
+							<img loading="lazy" data-sal="fade" data-sal-delay="300" data-sal-easing="ease-In-Out-Cubic"
 								src="image/2.png" alt="developer team" title="Developer Team">
 						</div>
 					</div>
@@ -287,7 +287,7 @@
 				<div class="col-lg-4 col-xl-4 col-md-6 mb-4">
 					<div class="service__single">
 						<div class="service__single--box">
-							<div class="icon"><img src="Admin/images/service_images/<?php echo $row['image'] ?>" alt=""></div>
+							<div class="icon"><img loading="lazy" src="Admin/images/service_images/<?php echo $row['image'] ?>" alt=""></div>
 							<div class="service__single--box-meta">
 								<div class="meta-text">
 									<!-- <a href="#">Web Design</a> -->
@@ -355,7 +355,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="project__single" title="E-learning Website Project">
 						<div class="project__single--box">
-							<img class="img-fluid" src="Admin/images/project_images/<?php echo $row['image'] ?>" alt="">
+							<img loading="lazy" class="img-fluid" src="Admin/images/project_images/<?php echo $row['image'] ?>" alt="">
 							<div class="project__meta">
 								<div class="project__meta--info">
 									<span class="project-name"><a href="project.php">
@@ -404,7 +404,7 @@
 					<div class="team__single">
 						<div class="team__single--box">
 							<div class="team__single--wrap">
-								<img class="img-fluid" src="Admin/images/team_images/<?php echo $row['image'] ?>" alt="image">
+								<img loading="lazy" class="img-fluid" src="Admin/images/team_images/<?php echo $row['image'] ?>" alt="image">
 								<div class="team-meta">
 									<div class="team-meta-info">
 										<a href="#"><?php echo $row["name"] ?></a>
@@ -440,7 +440,7 @@
 					<div class="testimonial__left">
 						<div class="pagination__dots"></div>
 						<div class="image">
-							<img src="assets/img/testimonial/testimonial-two.jpg" alt="">
+							<img loading="lazy" src="assets/img/testimonial/testimonial-two.jpg" alt="">
 						</div>
 					</div>
 				</div>
@@ -458,7 +458,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -466,7 +466,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Zent Ekizie
@@ -486,7 +486,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -494,7 +494,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-2.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-2.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Tamanna Jahan
@@ -514,7 +514,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -522,7 +522,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-3.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-3.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Eliza Stella
@@ -567,14 +567,14 @@
 					<div class="blog__single">
 						<div class="blog__single--box">
 							<a href="blog.php" class="blog-img">
-								<img src="Admin/images/blog_images/<?php echo $row['main_img'] ?>" alt="blog">
+								<img loading="lazy" src="Admin/images/blog_images/<?php echo $row['main_img'] ?>" alt="blog">
 								
 							</a>
 							<div class="blog__single--meta">
 								<a href="blog.php" class="blog--title"><?php echo $row["title"] ?></a>
 								<div class="author-date">
 									<div class="author">
-										<!-- <img src="assets/img/author/author-1.jpg" alt="author"> -->
+										<!-- <img loading="lazy" src="assets/img/author/author-1.jpg" alt="author"> -->
 										<a href="blog.php"><?php echo $row["client_name"] ?></a>
 									</div>
 									<div class="date">

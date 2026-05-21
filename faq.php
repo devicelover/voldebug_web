@@ -57,7 +57,7 @@
 						<div class="offcanvase__menu--logo">
 							<div class="offcanvase__logo">
 								<a href="index.php">
-									<img src="assets/img/logo/logo.svg" alt="insoand">
+									<img loading="lazy" src="assets/img/logo/logo.svg" alt="insoand">
 								</a>
 							</div>
 						</div>
@@ -93,7 +93,7 @@
 						</ul>
 					</div>
 					<div class="thanks-giving mt-5">
-						<img src="assets/img/thanks.jpg" alt="thank you">
+						<img loading="lazy" src="assets/img/thanks.jpg" alt="thank you">
 					</div>
 				</div>
 			</div>
@@ -114,15 +114,13 @@
 	<div class="breadcrumb pt-80 pb-80">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Faq</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Common questions about working with Voldebug — pricing, timelines, ownership, support.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -143,7 +141,7 @@
 				<div class="col-lg-4 col-xl-4">
 					<div class="faq__image">
 						<div class="faq__image-img">
-							<img src="assets/img/faq.jpg" alt="faq">
+							<img loading="lazy" src="assets/img/faq.jpg" alt="faq">
 						</div>
 					</div>
 				</div>
@@ -229,7 +227,7 @@
 					<div class="testimonial__left">
 						<div class="pagination__dots"></div>
 						<div class="image">
-							<img src="assets/img/testimonial/testimonial-two.jpg" alt="">
+							<img loading="lazy" src="assets/img/testimonial/testimonial-two.jpg" alt="">
 						</div>
 					</div>
 				</div>
@@ -247,7 +245,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -255,7 +253,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Savanna Nguyen
@@ -275,7 +273,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -283,7 +281,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Savanna Nguyen
@@ -303,7 +301,7 @@
 											<i class="fa-solid fa-star"></i>
 										</div>
 										<div class="quote">
-											<img src="assets/img/animated-icon/quote-two.png" alt="">
+											<img loading="lazy" src="assets/img/animated-icon/quote-two.png" alt="">
 										</div>
 									</div>
 									<p>High-quality images are essential for marketing materials and websites. Whether you need product photography, headshots, or lifestyle shots, professional photographers can capture the right images for your business. Content is king in the digital age. Creative services can help you create. We dream of a world where
@@ -311,7 +309,7 @@
 									</p>
 									<div class="d-flex gap-3 align-items-center mt-20">
 										<div class="tauthor">
-											<img src="assets/img/testimonial/author-1.png" alt="">
+											<img loading="lazy" src="assets/img/testimonial/author-1.png" alt="">
 										</div>
 										<div class="tnamedes">
 											<h6>Savanna Nguyen
@@ -340,7 +338,7 @@
 	<div class="footer-credit">
 		<div class="container">
 			<div class="footer-credit--img">
-				<a href="index.php"><img src="assets/img/logo/footer-logo.svg" alt="footer logo"></a>
+				<a href="index.php"><img loading="lazy" src="assets/img/logo/footer-logo.svg" alt="footer logo"></a>
 			</div>
 			<div class="footer-credit__wrapper">
 				<div class="copy-right">

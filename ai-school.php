@@ -446,7 +446,7 @@
 						$img_title = htmlspecialchars($gallery_row['title'] ?? 'Event');
 					?>
 					<div class="ai-school-gallery-item" data-img="<?php echo htmlspecialchars($img_src); ?>" data-title="<?php echo $img_title; ?>" role="button" tabindex="0">
-						<img src="<?php echo $img_src; ?>" alt="<?php echo $img_title; ?>" loading="lazy" width="600" height="400">
+						<img loading="lazy" src="<?php echo $img_src; ?>" alt="<?php echo $img_title; ?>" loading="lazy" width="600" height="400">
 						<span class="caption"><?php echo $img_title; ?></span>
 						<span class="click-hint"><i class="fa-solid fa-expand"></i> Click to enlarge</span>
 					</div>
@@ -464,7 +464,7 @@
 					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="opacity: 1; font-size: 1.5rem;"></button>
 				</div>
 				<div class="modal-body p-0">
-					<img id="lightboxImg" src="" alt="">
+					<img loading="lazy" id="lightboxImg" src="" alt="">
 					<div class="lightbox-caption" id="lightboxCaption"></div>
 				</div>
 			</div>

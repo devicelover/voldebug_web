@@ -68,15 +68,13 @@
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Project</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>A glimpse into recent client engagements — from IoT dashboards and law-enforcement systems to e-commerce platforms.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -102,7 +100,7 @@
                 <div class="col-lg-4 col-md-6">
                 <div class="project__single">
                     <div class="project__single--box">
-                    <img class="img-fluid" src="Admin/images/project_images/<?php echo $row['image'] ?>" alt="">
+                    <img loading="lazy" class="img-fluid" src="Admin/images/project_images/<?php echo $row['image'] ?>" alt="">
                     <div class="project__meta">
                         <div class="project__meta--info">
                             <span class="project-name"><a href="#"><?php echo $row["name"] ?></a></span>

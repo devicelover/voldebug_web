@@ -78,6 +78,14 @@
                                 <label for="instagram">Instagram</label>
                                 <input type="url" class="form-control" id="instagram" name="instagram" value="<?php echo isset($settings['instagram']) ? $settings['instagram'] : ''; ?>">
                             </div>
+                            <div class="form-group">
+                                <label for="linkedin">LinkedIn</label>
+                                <input type="url" class="form-control" id="linkedin" name="linkedin" value="<?php echo isset($settings['linkedin']) ? $settings['linkedin'] : ''; ?>" placeholder="https://linkedin.com/company/voldebug">
+                            </div>
+                            <div class="form-group">
+                                <label for="twitter">Twitter / X</label>
+                                <input type="url" class="form-control" id="twitter" name="twitter" value="<?php echo isset($settings['twitter']) ? $settings['twitter'] : ''; ?>" placeholder="https://x.com/voldebug">
+                            </div>
 
                             <button type="submit" class="btn btn-primary" name="submit">Save</button>
                             </form>

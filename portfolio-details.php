@@ -57,7 +57,7 @@
 						<div class="offcanvase__menu--logo">
 							<div class="offcanvase__logo">
 								<a href="index.php">
-									<img src="assets/img/logo/logo.svg" alt="insoand">
+									<img loading="lazy" src="assets/img/logo/logo.svg" alt="insoand">
 								</a>
 							</div>
 						</div>
@@ -93,7 +93,7 @@
 						</ul>
 					</div>
 					<div class="thanks-giving mt-5">
-						<img src="assets/img/thanks.jpg" alt="thank you">
+						<img loading="lazy" src="assets/img/thanks.jpg" alt="thank you">
 					</div>
 				</div>
 			</div>
@@ -113,15 +113,13 @@
 	<div class="breadcrumb pt-80 pb-80">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Project Details</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Inside one of our portfolio engagements — what we built and why.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -165,7 +163,7 @@
 							</ul>
 						</div>
 						<div class="project-details__text">
-							<img src="assets/img/project/project-details-1.jpg" alt="app landing"
+							<img loading="lazy" src="assets/img/project/project-details-1.jpg" alt="app landing"
 								title="App Landing Dashboard">
 
 							<h4>Solutions</h4>
@@ -182,7 +180,7 @@
 								<li>Your website is often the first point of contact with potential customers.</li>
 							</ul>
 
-							<img src="assets/img/project/project-details-2.jpg" alt="website"
+							<img loading="lazy" src="assets/img/project/project-details-2.jpg" alt="website"
 								title="e-learning Website Ui">
 							<h4>Problem</h4>
 							<p> Agency is a dynamic and innovative creative agency dedicated to transforming your
@@ -224,7 +222,7 @@
 								</p>
 								<div class="used-tool">
 									<div class="tool-img">
-										<img src="assets/img/project/tool-icon.png" alt="">
+										<img loading="lazy" src="assets/img/project/tool-icon.png" alt="">
 									</div>
 									<ul class="tool-info">
 										<li><span class="style">Regular</span>-<span>This is a text Message</span></li>
@@ -266,7 +264,7 @@
 	<div class="footer-credit">
 		<div class="container">
 			<div class="footer-credit--img">
-				<a href="index.php"><img src="assets/img/logo/footer-logo.svg" alt="footer logo"></a>
+				<a href="index.php"><img loading="lazy" src="assets/img/logo/footer-logo.svg" alt="footer logo"></a>
 			</div>
 			<div class="footer-credit__wrapper">
 				<div class="copy-right">

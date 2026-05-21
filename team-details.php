@@ -66,15 +66,13 @@
 	<div class="breadcrumb pt-80 pb-80">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h5 class="title">Team Details</h5>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>More about a member of the Voldebug team.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -96,7 +94,7 @@
 					<div class="team-details__img">
 						<div class="team-details__img--content">
 							<div class="team-details__img--content--img">
-								<img src="assets/img/team/team-details.png" alt="ceo">
+								<img loading="lazy" src="assets/img/team/team-details.png" alt="ceo">
 							</div>
 							<div class="team-social-link">
 								<div class="icon"><i class="fa-solid fa-plus"></i></div>

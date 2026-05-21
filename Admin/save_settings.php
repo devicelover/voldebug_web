@@ -16,6 +16,8 @@ $address_two   = trim($_POST['address_two']   ?? '');
 $facebook      = trim($_POST['facebook']      ?? '');
 $instagram     = trim($_POST['instagram']     ?? '');
 $github        = trim($_POST['github']        ?? '');
+$linkedin      = trim($_POST['linkedin']      ?? '');
+$twitter       = trim($_POST['twitter']       ?? '');
 $opening_hours = trim($_POST['opening_hours'] ?? '');
 $opening_day   = trim($_POST['opening_day']   ?? '');
 
@@ -28,12 +30,14 @@ if ($exists === 0) {
 $stmt = $con->prepare(
     "UPDATE settings SET
         name = ?, phone = ?, email = ?, opening_hours = ?, opening_day = ?,
-        map = ?, address = ?, address_two = ?, facebook = ?, instagram = ?, github = ?
+        map = ?, address = ?, address_two = ?,
+        facebook = ?, instagram = ?, github = ?, linkedin = ?, twitter = ?
      WHERE id = 1"
 );
-$stmt->bind_param('sssssssssss',
+$stmt->bind_param('sssssssssssss',
     $name, $phone, $email, $opening_hours, $opening_day,
-    $map, $address, $address_two, $facebook, $instagram, $github
+    $map, $address, $address_two,
+    $facebook, $instagram, $github, $linkedin, $twitter
 );
 if ($stmt->execute()) {
     header('Location: settings.php?msg=' . urlencode('Settings saved.'));

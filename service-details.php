@@ -83,15 +83,13 @@ if (isset($_GET['id'])) {
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
 					<h1 class="title"><span><?php echo $service['name']?></span> Service Details</h1>
-					<p>For businesses with digital products or services,
-						ensuring a user-friendly and visually appealing
-						interface is vital.</p>
+					<p>Our services are built around one promise — we ship on time, secure by default, and stay long enough to support what we deliver.</p>
 				</div>
 				<div class="breadcrumb__wrapper--link">
 					<ul aria-label="breadcrumb">
@@ -112,7 +110,7 @@ if (isset($_GET['id'])) {
 				<div class="col-8 service-details__text--content">
 				<h3><span><?php echo $service['name']; ?></span></h3>
 				<div class="service-details__img">
-					<img src="Admin/images/service_images/<?php echo $service['image'] ?>" alt="">
+					<img loading="lazy" src="Admin/images/service_images/<?php echo $service['image'] ?>" alt="">
 				</div>
 				<p><?php echo $service['description']; ?></p>
 				</div>

@@ -82,8 +82,8 @@ if (isset($_GET['id'])) {
 	<div class="breadcrumb pt-40 pb-40">
 		<div class="container">
 			<div class="breadcrumb__vector">
-				<img src="assets/img/animated-icon/graph.png" alt="graph">
-				<img src="assets/img/animated-icon/star-icon.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/graph.png" alt="graph">
+				<img loading="lazy" src="assets/img/animated-icon/star-icon.png" alt="graph">
 			</div>
 			<div class="breadcrumb__wrapper">
 				<div class="breadcrumb__wrapper--text">
@@ -130,7 +130,7 @@ if (isset($_GET['id'])) {
 							</ul>
 						</div>
 						<div class="project-details__text">
-							<img src="Admin/images/project_images/<?php echo $project['image'] ?>" alt="app landing"
+							<img loading="lazy" src="Admin/images/project_images/<?php echo $project['image'] ?>" alt="app landing"
 								title="App Landing Dashboard">
 
 							<h4>Description</h4>
@@ -149,7 +149,7 @@ if (isset($_GET['id'])) {
 								<li>Your website is often the first point of contact with potential customers.</li>
 							</ul>
 
-							<img src="assets/img/project/project-details-2.jpg" alt="website"
+							<img loading="lazy" src="assets/img/project/project-details-2.jpg" alt="website"
 								title="e-learning Website Ui">
 							<h4>Problem</h4> -->
 							<!-- <p> Agency is a dynamic and innovative creative agency dedicated to transforming your
@@ -191,7 +191,7 @@ if (isset($_GET['id'])) {
 								</p>
 								<div class="used-tool">
 									<div class="tool-img">
-										<img src="assets/img/project/tool-icon.png" alt="">
+										<img loading="lazy" src="assets/img/project/tool-icon.png" alt="">
 									</div>
 									<ul class="tool-info">
 										<li><span class="style">Regular</span>-<span>This is a text Message</span></li>
