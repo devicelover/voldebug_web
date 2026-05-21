@@ -43,7 +43,7 @@ $statuses = ['applied' => 'Applied', 'reviewed' => 'Reviewed', 'shortlisted' => 
 
         <?php if ($msg): ?><div class="alert alert-success"><?= htmlspecialchars($msg) ?></div><?php endif; ?>
 
-        <div class="card mb-3"><div class="card-body d-flex align-items-center justify-content-between">
+        <div class="card mb-3"><div class="card-body d-flex align-items-center justify-content-between flex-wrap">
             <form method="get" class="form-inline mb-0">
                 <label class="mr-2">Filter status</label>
                 <select name="status" class="form-control mr-2" onchange="this.form.submit()">
@@ -53,14 +53,27 @@ $statuses = ['applied' => 'Applied', 'reviewed' => 'Reviewed', 'shortlisted' => 
                     <?php endforeach; ?>
                 </select>
             </form>
-            <div class="text-muted">Total: <strong><?= count($rows) ?></strong></div>
+            <div class="d-flex align-items-center" style="gap:12px">
+                <span class="text-muted">Total: <strong><?= count($rows) ?></strong></span>
+                <span class="text-muted">Selected: <strong id="selectedCount">0</strong></span>
+                <button type="button" id="emailSelectedBtn" class="btn btn-sm btn-primary" disabled onclick="sendToSelected()">
+                    ✉ Email selected
+                </button>
+            </div>
         </div></div>
+
+        <!-- Hidden form that posts the selected IDs to the bulk compose page -->
+        <form method="post" action="hr_applicant_bulk_email.php" id="bulkSelectForm" style="display:none">
+            <?php echo csrf_field(); ?>
+            <input type="hidden" name="ids" id="bulkSelectIds" value="">
+        </form>
 
         <div class="card"><div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-sm">
                     <thead class="text-center">
                         <tr>
+                            <th width="30"><input type="checkbox" id="selectAll" title="Select all"></th>
                             <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Position</th><th>Applied for (job)</th>
                             <th>Resume</th><th>Status</th><th>Applied</th><th>Actions</th>
                         </tr>
@@ -68,6 +81,7 @@ $statuses = ['applied' => 'Applied', 'reviewed' => 'Reviewed', 'shortlisted' => 
                     <tbody>
                     <?php foreach ($rows as $r): ?>
                         <tr>
+                            <td class="text-center"><input type="checkbox" class="row-check" value="<?= (int)$r['id'] ?>" data-email="<?= htmlspecialchars($r['email'], ENT_QUOTES) ?>"></td>
                             <td><?= (int)$r['id'] ?></td>
                             <td><?= htmlspecialchars($r['name']) ?></td>
                             <td><a href="mailto:<?= htmlspecialchars($r['email']) ?>"><?= htmlspecialchars($r['email']) ?></a></td>
@@ -226,8 +240,33 @@ Warm Regards,
 <?php include 'partials/right-sidebar.php'; ?>
 <?php include 'partials/vendor-scripts.php'; ?>
 <script>
-// Template picker → autofill subject/body inside the same form.
-// Skips empty selection so the admin can write from scratch.
+// === Row-selection & bulk-email plumbing ===
+function updateSelected() {
+    var checked = document.querySelectorAll('.row-check:checked');
+    var n = checked.length;
+    document.getElementById('selectedCount').textContent = n;
+    document.getElementById('emailSelectedBtn').disabled = (n === 0);
+    // Also keep a hidden value in sync — if user clicks Email Selected we already have it.
+    var ids = Array.from(checked).map(function (c) { return c.value; });
+    document.getElementById('bulkSelectIds').value = ids.join(',');
+}
+document.addEventListener('change', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('row-check')) updateSelected();
+    if (e.target && e.target.id === 'selectAll') {
+        var rows = document.querySelectorAll('.row-check');
+        rows.forEach(function (c) { c.checked = e.target.checked; });
+        updateSelected();
+    }
+});
+function sendToSelected() {
+    var checked = document.querySelectorAll('.row-check:checked');
+    if (!checked.length) { alert('Select at least one applicant first.'); return; }
+    var ids = Array.from(checked).map(function (c) { return c.value; }).join(',');
+    document.getElementById('bulkSelectIds').value = ids;
+    document.getElementById('bulkSelectForm').submit();
+}
+
+// === Single-applicant template picker → autofill subject/body inside the same form ===
 document.addEventListener('change', function (e) {
     var sel = e.target;
     if (!sel.classList || !sel.classList.contains('tpl-picker')) return;
