@@ -18,6 +18,31 @@ $includeSig  = isset($_POST['include_signature']) && $_POST['include_signature']
 $includeStmp = isset($_POST['include_stamp'])     && $_POST['include_stamp']     === '1';
 $sendEmail   = isset($_POST['send_email'])        && $_POST['send_email']        === '1';
 
+// Optional batch-wide guest signatory — uploaded once, applied to every cert in the batch.
+$guestForBatch = null;
+$guestName = trim($_POST['guest_name'] ?? '');
+if ($guestName !== '') {
+    $guestImg = '';
+    if (!empty($_FILES['guest_signature_image']['name'])) {
+        $allow = ['jpg','jpeg','png','gif','webp','svg'];
+        $ext = strtolower(pathinfo($_FILES['guest_signature_image']['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, $allow, true)) {
+            $dir = __DIR__ . '/images/cert_guests/';
+            if (!is_dir($dir)) mkdir($dir, 0755, true);
+            $guestImg = 'guest_' . time() . '_' . bin2hex(random_bytes(2)) . '.' . $ext;
+            if (!move_uploaded_file($_FILES['guest_signature_image']['tmp_name'], $dir . $guestImg)) {
+                $guestImg = '';
+            }
+        }
+    }
+    $guestForBatch = [
+        'name'            => $guestName,
+        'designation'     => trim($_POST['guest_designation']  ?? ''),
+        'organization'    => trim($_POST['guest_organization'] ?? ''),
+        'signature_image' => $guestImg,
+    ];
+}
+
 if ($batchName === '' || $template_id === 0 || empty($_FILES['sheet']['name'])) {
     header('Location: hr_certificate_bulk.php?msg=' . urlencode('Batch name, template, and file required.'));
     exit;
@@ -107,7 +132,7 @@ foreach ($rows as $r) {
     $date  = $r['completion_date'] ?: date('Y-m-d');
 
     try {
-        $res = $gen->generate([
+        $rowInput = [
             'recipient_name'  => $name,
             'recipient_email' => $email,
             'course_name'     => $course,
@@ -116,7 +141,9 @@ foreach ($rows as $r) {
             'custom1'         => $r['custom1']  ?? '',
             'custom2'         => $r['custom2']  ?? '',
             'custom3'         => $r['custom3']  ?? '',
-        ], $template, $partner, [
+        ];
+        if ($guestForBatch) $rowInput['guest_signatory'] = $guestForBatch;
+        $res = $gen->generate($rowInput, $template, $partner, [
             'include_signature' => $includeSig,
             'include_stamp'     => $includeStmp,
             'batch_id'          => $batchId,

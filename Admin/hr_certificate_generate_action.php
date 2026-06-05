@@ -47,6 +47,31 @@ if ($input['recipient_name'] === '' || $input['course_name'] === '') {
     exit;
 }
 
+// Optional guest signatory section: name + designation + organization + (optional) image.
+$guestName = trim($_POST['guest_name'] ?? '');
+if ($guestName !== '') {
+    // Save guest signature image if provided.
+    $guestImg = '';
+    if (!empty($_FILES['guest_signature_image']['name'])) {
+        $allow = ['jpg','jpeg','png','gif','webp','svg'];
+        $ext = strtolower(pathinfo($_FILES['guest_signature_image']['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, $allow, true)) {
+            $dir = __DIR__ . '/images/cert_guests/';
+            if (!is_dir($dir)) mkdir($dir, 0755, true);
+            $guestImg = 'guest_' . time() . '_' . bin2hex(random_bytes(2)) . '.' . $ext;
+            if (!move_uploaded_file($_FILES['guest_signature_image']['tmp_name'], $dir . $guestImg)) {
+                $guestImg = '';
+            }
+        }
+    }
+    $input['guest_signatory'] = [
+        'name'            => $guestName,
+        'designation'     => trim($_POST['guest_designation']  ?? ''),
+        'organization'    => trim($_POST['guest_organization'] ?? ''),
+        'signature_image' => $guestImg,
+    ];
+}
+
 $gen = new CertificateGenerator($con, $settings, $APP_SECRETS['public_base_url'], VOLDEBUG_ROOT . '/Admin/certificates');
 $opts = [
     'include_signature' => isset($_POST['include_signature']) && $_POST['include_signature'] === '1',

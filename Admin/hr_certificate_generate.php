@@ -20,7 +20,7 @@ $msg = $_GET['msg'] ?? '';
             <div class="alert alert-warning">No active templates. <a href="hr_certificate_template_edit.php">Create one first.</a></div>
         <?php else: ?>
         <div class="card"><div class="card-body">
-            <form method="post" action="hr_certificate_generate_action.php">
+            <form method="post" action="hr_certificate_generate_action.php" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
 
                 <div class="row">
@@ -64,6 +64,23 @@ $msg = $_GET['msg'] ?? '';
                     <label class="mr-3"><input type="checkbox" name="include_signature" value="1" checked> Include signature</label>
                     <label class="mr-3"><input type="checkbox" name="include_stamp"     value="1" checked> Include digital stamp</label>
                     <label class="mr-3"><input type="checkbox" name="send_email"        value="1"> Email to recipient now</label>
+                </div>
+
+                <h6 class="mt-3"><label><input type="checkbox" id="toggleGuest" onclick="document.getElementById('guestBlock').style.display = this.checked ? 'block' : 'none'"> Add another signatory (guest speaker, head, mentor, etc.)</label></h6>
+                <div id="guestBlock" style="display:none; background:#f8faf9; padding:14px 18px; border-radius:8px; margin-bottom:14px">
+                    <p class="text-muted" style="font-size:13px">Used in addition to the default Voldebug signatory + any partner-institute signatory. Goes on this cert only.</p>
+                    <div class="row">
+                        <div class="col-md-6 form-group"><label>Guest name</label>
+                            <input type="text" name="guest_name" class="form-control" placeholder="e.g. Dr. Priya Sharma"></div>
+                        <div class="col-md-6 form-group"><label>Designation</label>
+                            <input type="text" name="guest_designation" class="form-control" placeholder="e.g. Guest Speaker / Head of Programs"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group"><label>Organization (optional)</label>
+                            <input type="text" name="guest_organization" class="form-control" placeholder="e.g. IIT Bombay"></div>
+                        <div class="col-md-6 form-group"><label>Signature image (optional)</label>
+                            <input type="file" name="guest_signature_image" class="form-control" accept="image/*"></div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Generate Certificate</button>

@@ -61,6 +61,23 @@ $msg = $_GET['msg'] ?? '';
                     <label class="mr-3"><input type="checkbox" name="send_email"        value="1"> Email each cert (recipients with valid emails)</label>
                 </div>
 
+                <h6 class="mt-3"><label><input type="checkbox" id="toggleGuestB" onclick="document.getElementById('guestBlockB').style.display = this.checked ? 'block' : 'none'"> Add another signatory to all certificates in this batch (guest speaker, head, mentor)</label></h6>
+                <div id="guestBlockB" style="display:none; background:#f8faf9; padding:14px 18px; border-radius:8px; margin-bottom:14px">
+                    <p class="text-muted" style="font-size:13px">Applied uniformly to every certificate in this batch, alongside the Voldebug signatory and any partner-institute signatory.</p>
+                    <div class="row">
+                        <div class="col-md-6 form-group"><label>Guest name</label>
+                            <input type="text" name="guest_name" class="form-control" placeholder="e.g. Dr. Priya Sharma"></div>
+                        <div class="col-md-6 form-group"><label>Designation</label>
+                            <input type="text" name="guest_designation" class="form-control" placeholder="e.g. Guest Speaker"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group"><label>Organization (optional)</label>
+                            <input type="text" name="guest_organization" class="form-control" placeholder="e.g. IIT Bombay"></div>
+                        <div class="col-md-6 form-group"><label>Signature image (optional)</label>
+                            <input type="file" name="guest_signature_image" class="form-control" accept="image/*"></div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Process &amp; Generate</button>
                 <a href="hr_certificates.php" class="btn btn-outline-secondary">Back</a>
             </form>

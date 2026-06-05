@@ -78,6 +78,8 @@ class CertificateGenerator
             'custom3'             => $input['custom3'] ?? '',
             'custom4'             => $input['custom4'] ?? '',
             'custom5'             => $input['custom5'] ?? '',
+            // Optional per-cert guest signatory (rendered alongside Voldebug + partner sigs).
+            'guest_signatory'     => $input['guest_signatory'] ?? null,
         ];
 
         $bodyHtml     = function_exists('render_placeholders')
@@ -117,6 +119,7 @@ class CertificateGenerator
             'custom3' => $input['custom3'] ?? '',
             'custom4' => $input['custom4'] ?? '',
             'custom5' => $input['custom5'] ?? '',
+            'guest_signatory' => $input['guest_signatory'] ?? null,
         ]);
 
         $stmt = $this->db->prepare(
@@ -214,22 +217,56 @@ class CertificateGenerator
                 . '</div>';
         }
 
-        // Signature block — single (Voldebug only) or dual (Voldebug + partner). Compact.
+        // Signature block — supports up to 3 columns: Voldebug (always), Partner (if set),
+        // Guest (if set on this specific cert). One signature shows centered; 2-3 shown in a row.
+        $sigCols = [];
+
+        // 1. Voldebug signatory (default). Company name omitted from sub-line — header already
+        // identifies the issuing org.
+        $sigCols[] = [
+            'img'  => $sigImg,
+            'name' => $sigName,
+            'role' => $sigRole,
+        ];
+
+        // 2. Partner co-signatory (only if a partner row was passed AND has a signatory).
         if ($partner && $partnerSigName !== '') {
-            $signaturesHtml = '<table class="sigs"><tr>'
-                . '<td>' . ($sigImg ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line"></div>'
-                . '<div class="sig-name">' . $sigName . '</div>'
-                . '<div class="sig-role">' . $sigRole . ' · ' . $company . '</div></td>'
-                . '<td>' . ($partnerSigImg ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line"></div>'
-                . '<div class="sig-name">' . $partnerSigName . '</div>'
-                . '<div class="sig-role">' . $partnerSigRole . ' · ' . $partnerName . '</div></td>'
-                . '</tr></table>';
-        } else {
+            $sigCols[] = [
+                'img'  => $partnerSigImg,
+                'name' => $partnerSigName,
+                'role' => $partnerSigRole . ($partnerName ? ' · ' . $partnerName : ''),
+            ];
+        }
+
+        // 3. Guest signatory (per-cert, dropped in via $vars['guest_signatory']).
+        $guest = $vars['guest_signatory'] ?? null;
+        if (is_array($guest) && !empty($guest['name'])) {
+            $guestImg = !empty($guest['signature_image'])
+                ? $this->imageTag($guest['signature_image'], 'cert_guests', 'max-height:38px')
+                : '';
+            $guestRole = trim(($guest['designation'] ?? '') . (!empty($guest['organization']) ? ' · ' . $guest['organization'] : ''));
+            $sigCols[] = [
+                'img'  => $guestImg,
+                'name' => htmlspecialchars($guest['name']),
+                'role' => htmlspecialchars($guestRole),
+            ];
+        }
+
+        if (count($sigCols) === 1) {
+            $c = $sigCols[0];
             $signaturesHtml = '<div class="sig-single">'
-                . ($sigImg ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line-solo"></div>'
-                . '<div class="sig-name">' . $sigName . '</div>'
-                . '<div class="sig-role">' . $sigRole . ' · ' . $company . '</div>'
+                . ($c['img'] ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line-solo"></div>'
+                . '<div class="sig-name">' . $c['name'] . '</div>'
+                . '<div class="sig-role">' . $c['role'] . '</div>'
                 . '</div>';
+        } else {
+            $tds = '';
+            foreach ($sigCols as $c) {
+                $tds .= '<td>' . ($c['img'] ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line"></div>'
+                      . '<div class="sig-name">' . $c['name'] . '</div>'
+                      . '<div class="sig-role">' . $c['role'] . '</div></td>';
+            }
+            $signaturesHtml = '<table class="sigs sigs-' . count($sigCols) . '"><tr>' . $tds . '</tr></table>';
         }
 
         $qrHtml = $qrDataUri
@@ -398,14 +435,16 @@ class CertificateGenerator
     }
     .ornament-break .dot-gold { background: {$gold}; }
 
-    /* Signatures — tighter, closer to the body */
+    /* Signatures — tighter, closer to the body. Width scales with column count. */
     .sig-block { margin: 6mm auto 0 auto; }
-    .sigs { width: 75%; border-collapse: collapse; margin: 0 auto; }
-    .sigs td { width: 50%; text-align: center; padding: 0 24px; vertical-align: bottom; }
+    .sigs { border-collapse: collapse; margin: 0 auto; }
+    .sigs-2 { width: 70%; } .sigs-2 td { width: 50%; }
+    .sigs-3 { width: 90%; } .sigs-3 td { width: 33.33%; }
+    .sigs td { text-align: center; padding: 0 16px; vertical-align: bottom; }
     .sig-single { text-align: center; }
     .sig-line, .sig-line-solo {
         border-top: 1px solid #2a2a2a;
-        margin: 4px 12mm 4px 12mm;
+        margin: 4px 10mm 4px 10mm;
     }
     .sig-line-solo { margin: 4px 60mm 4px 60mm; }
     .sig-name { font-weight: 700; font-size: 10.5pt; color: #111; letter-spacing: 0.4px; margin-top: 4px; }
@@ -452,7 +491,7 @@ class CertificateGenerator
 
         <div class="divider"></div>
 
-        <div class="pre-title">{$company} · Awarded by</div>
+        <div class="pre-title">Awarded by</div>
         <div class="title">{$title}</div>
         <span class="title-rule"></span>
 
