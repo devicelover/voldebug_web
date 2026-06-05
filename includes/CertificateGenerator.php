@@ -135,30 +135,25 @@ class CertificateGenerator
         $duration = (string) ($input['duration'] ?? '');
         $sig = $includeSig ? 1 : 0;
         $stmp = $includeStamp ? 1 : 0;
-        $stmt->bind_param('siiisssssiiii',
-            $token, $tid, $pid, $bid, $name, $email,
+        // Type string: s=token, i=tid, i=pid, i=bid,
+        //              s=name, s=email, s=course, s=completionDate, s=duration, s=customJson,
+        //              i=sig, i=stmp, s=relPath  → siiissssssiis (13 chars)
+        // Use the NULLIF form unconditionally — partner_id / batch_id default to 0 which becomes NULL.
+        $stmt->close();
+        $stmt = $this->db->prepare(
+            "INSERT INTO certificates_issued
+                (verify_token, template_id, partner_id, batch_id, recipient_name, recipient_email,
+                 course_name, completion_date, duration, custom_fields,
+                 include_signature, include_stamp, pdf_path)
+             VALUES (?, ?, NULLIF(?, 0), NULLIF(?, 0), ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+        $pidI = $pid ?? 0;
+        $bidI = $bid ?? 0;
+        $stmt->bind_param('siiissssssiis',
+            $token, $tid, $pidI, $bidI, $name, $email,
             $course, $completionDate, $duration, $customJson,
             $sig, $stmp, $relPath
         );
-
-        // bind_param requires variables by reference, and the partner/batch nullable ints
-        // need to be re-bound with NULL handling. Quick workaround:
-        if ($pid === null || $bid === null) {
-            $stmt->close();
-            $stmt = $this->db->prepare(
-                "INSERT INTO certificates_issued
-                    (verify_token, template_id, partner_id, batch_id, recipient_name, recipient_email,
-                     course_name, completion_date, duration, custom_fields,
-                     include_signature, include_stamp, pdf_path)
-                 VALUES (?, ?, NULLIF(?, 0), NULLIF(?, 0), ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-            );
-            $pidI = $pid ?? 0; $bidI = $bid ?? 0;
-            $stmt->bind_param('siiisssssiiii',
-                $token, $tid, $pidI, $bidI, $name, $email,
-                $course, $completionDate, $duration, $customJson,
-                $sig, $stmp, $relPath
-            );
-        }
         $stmt->execute();
         $newId = (int) $stmt->insert_id;
 
