@@ -176,7 +176,9 @@ class CertificateGenerator
     private function buildFullHtml(array $tpl, ?array $partner, string $body, array $vars, ?string $qrDataUri, string $token, bool $includeSig, bool $includeStamp): string
     {
         $brand   = $this->settings['brand_color']  ?: '#1a8f4a';
-        $accent  = '#c8a45d';                                   // gold accent for ornate feel
+        $brandDk = '#0f5a2e';                                   // darker shade for borders
+        $gold    = '#b8924a';                                   // refined gold
+        $cream   = '#fbf8ed';                                   // off-white background
         $title   = htmlspecialchars($tpl['title']);
         $company = htmlspecialchars($vars['company']);
         $cin     = htmlspecialchars($this->settings['cin']     ?? '');
@@ -184,157 +186,298 @@ class CertificateGenerator
         $sigRole = htmlspecialchars($vars['signatory_role']);
         $verify  = htmlspecialchars($vars['verify_url']);
 
-        $logoTag = $this->imageTag($this->settings['logo'] ?? '', 'letterhead', 'height:60px');
-        $sigImg  = $includeSig   ? $this->imageTag($this->settings['signature_image'] ?? '', 'letterhead', 'max-height:42px') : '';
-        $stampImg= $includeStamp ? $this->imageTag($this->settings['stamp_image']     ?? '', 'letterhead', 'max-height:90px') : '';
+        $logoTag = $this->imageTag($this->settings['logo'] ?? '', 'letterhead', 'max-height:42px');
+        $sigImg  = $includeSig   ? $this->imageTag($this->settings['signature_image'] ?? '', 'letterhead', 'max-height:38px') : '';
+        $stampImg= $includeStamp ? $this->imageTag($this->settings['stamp_image']     ?? '', 'letterhead', 'max-height:80px') : '';
 
         // Partner block — only rendered if a partner row was passed.
-        $partnerLogo = $partner ? $this->imageTag($partner['logo'] ?? '', 'cert_partners', 'height:60px') : '';
-        $partnerName = $partner ? htmlspecialchars($partner['name']) : '';
+        $partnerLogo     = $partner ? $this->imageTag($partner['logo'] ?? '', 'cert_partners', 'max-height:42px') : '';
+        $partnerName     = $partner ? htmlspecialchars($partner['name']) : '';
         $partnerSubtitle = $partner ? htmlspecialchars($partner['subtitle'] ?? '') : '';
         $partnerSigName  = $partner ? htmlspecialchars($partner['signatory_name'] ?? '') : '';
         $partnerSigRole  = $partner ? htmlspecialchars($partner['signatory_designation'] ?? '') : '';
-        $partnerSigImg   = $partner ? $this->imageTag($partner['signature_image'] ?? '', 'cert_partners', 'max-height:42px') : '';
+        $partnerSigImg   = $partner ? $this->imageTag($partner['signature_image'] ?? '', 'cert_partners', 'max-height:38px') : '';
 
-        // Build the dual or single signature block.
+        // Header: brand on left, optional partner on right (centered if no partner).
         if ($partner) {
-            $signaturesHtml = $this->signatureBlock($sigImg, $sigName, $sigRole, $company,
-                                                    $partnerSigImg, $partnerSigName, $partnerSigRole, $partnerName);
+            $headerHtml = '<table class="hdr"><tr>'
+                . '<td class="brand-cell"><div class="brand-row">' . $logoTag . '<span class="company-name">' . $company . '</span></div>'
+                . ($cin ? '<div class="cin">CIN: ' . $cin . '</div>' : '') . '</td>'
+                . '<td class="hdr-divider"></td>'
+                . '<td class="partner-cell"><div class="brand-row">' . ($partnerLogo ?: '') . '<span class="company-name">' . $partnerName . '</span></div>'
+                . ($partnerSubtitle ? '<div class="cin">' . $partnerSubtitle . '</div>' : '') . '</td>'
+                . '</tr></table>';
         } else {
-            $signaturesHtml = $this->signatureBlock($sigImg, $sigName, $sigRole, $company);
+            $headerHtml = '<div class="hdr-solo">'
+                . $logoTag . '<div class="company-name-solo">' . $company . '</div>'
+                . ($cin ? '<div class="cin">CIN: ' . $cin . '</div>' : '')
+                . '</div>';
+        }
+
+        // Signature block — single (Voldebug only) or dual (Voldebug + partner). Compact.
+        if ($partner && $partnerSigName !== '') {
+            $signaturesHtml = '<table class="sigs"><tr>'
+                . '<td>' . ($sigImg ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line"></div>'
+                . '<div class="sig-name">' . $sigName . '</div>'
+                . '<div class="sig-role">' . $sigRole . ' · ' . $company . '</div></td>'
+                . '<td>' . ($partnerSigImg ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line"></div>'
+                . '<div class="sig-name">' . $partnerSigName . '</div>'
+                . '<div class="sig-role">' . $partnerSigRole . ' · ' . $partnerName . '</div></td>'
+                . '</tr></table>';
+        } else {
+            $signaturesHtml = '<div class="sig-single">'
+                . ($sigImg ?: '<span class="sig-blank">&nbsp;</span>') . '<div class="sig-line-solo"></div>'
+                . '<div class="sig-name">' . $sigName . '</div>'
+                . '<div class="sig-role">' . $sigRole . ' · ' . $company . '</div>'
+                . '</div>';
         }
 
         $qrHtml = $qrDataUri
-            ? '<div class="qr"><img src="' . $qrDataUri . '" alt="Verify QR"><div class="qr-label">Scan to verify<br><span class="ref">VDB-' . htmlspecialchars(substr($token, 0, 10)) . '</span></div></div>'
+            ? '<div class="qr"><img src="' . $qrDataUri . '" alt="Verify"><div class="qr-label">Scan to verify<br><span class="ref">VDB-' . htmlspecialchars(substr($token, 0, 10)) . '</span></div></div>'
             : '';
 
-        $headerPartnerHtml = '';
-        if ($partner) {
-            $headerPartnerHtml = '<td class="partner-cell"><div class="partner-wrap">'
-                . ($partnerLogo ?: '<div class="partner-logo-placeholder">' . htmlspecialchars(substr($partnerName, 0, 18)) . '</div>')
-                . '<div class="partner-name">' . $partnerName . '</div>'
-                . ($partnerSubtitle ? '<div class="partner-sub">' . $partnerSubtitle . '</div>' : '')
-                . '</div></td>';
-        }
+        $stampHtml = $stampImg ? '<div class="stamp">' . $stampImg . '</div>' : '';
 
-        $headerHtml = '<table class="hdr"><tr>'
-            . '<td class="brand-cell"><div class="brand-wrap">' . $logoTag . '<div class="company-name">' . $company . '</div>'
-            . ($cin ? '<div class="cin">CIN: ' . $cin . '</div>' : '') . '</div></td>'
-            . ($partner ? '<td class="header-divider"></td>' . $headerPartnerHtml : '')
-            . '</tr></table>';
+        // CSS-only corner ornament (dompdf SVG transforms are unreliable).
+        // Each corner uses 4 small decorative lines + a gold diamond accent.
+        // Built per-corner via inline style to avoid transform: scale().
+        $cornerHtml = function(string $pos) use ($brandDk, $gold): string {
+            $tl = ($pos === 'tl'); $tr = ($pos === 'tr');
+            $bl = ($pos === 'bl'); $br = ($pos === 'br');
+            // Position the diamond inward from the corner
+            $dx = ($tl || $bl) ? 'left:14px'   : 'right:14px';
+            $dy = ($tl || $tr) ? 'top:14px'    : 'bottom:14px';
+            // L-shaped accent lines
+            $lh = ($tl || $bl) ? 'left:4px'    : 'right:4px';
+            $lv = ($tl || $tr) ? 'top:4px'     : 'bottom:4px';
+            return '<div class="cnr cnr-' . $pos . '">'
+                . '<div class="cnr-l-h" style="' . $lv . ';' . $lh . '"></div>'
+                . '<div class="cnr-l-v" style="' . $lv . ';' . $lh . '"></div>'
+                . '<div class="cnr-dot" style="' . $dx . ';' . $dy . '"></div>'
+                . '</div>';
+        };
 
         return <<<HTML
 <!doctype html>
 <html><head><meta charset="utf-8">
 <style>
-    @page { margin: 0; }
-    body { font-family: DejaVu Sans, sans-serif; color: #1a1a1a; margin: 0; padding: 0; background: #fff; }
+    @page { size: A4 landscape; margin: 0; }
+    html, body { margin: 0; padding: 0; background: #fff; font-family: DejaVu Sans, sans-serif; color: #1a1a1a; }
 
-    .page { position: relative; width: 100%; height: 200mm; padding: 14mm 18mm; box-sizing: border-box; }
-    .border-outer { position: absolute; left: 8mm; right: 8mm; top: 8mm; bottom: 8mm;
-        border: 3px solid {$brand}; border-radius: 6px; }
-    .border-inner { position: absolute; left: 11mm; right: 11mm; top: 11mm; bottom: 11mm;
-        border: 1px solid {$accent}; border-radius: 4px; }
-
-    /* Corner flourishes */
-    .corner { position: absolute; width: 28px; height: 28px; border: 3px solid {$brand}; }
-    .corner.tl { left: 4mm; top: 4mm; border-right: none; border-bottom: none; }
-    .corner.tr { right: 4mm; top: 4mm; border-left: none; border-bottom: none; }
-    .corner.bl { left: 4mm; bottom: 4mm; border-right: none; border-top: none; }
-    .corner.br { right: 4mm; bottom: 4mm; border-left: none; border-top: none; }
-
-    .content { position: relative; z-index: 2; padding: 12mm 14mm 8mm 14mm; }
-
-    /* Header */
-    .hdr { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-    .hdr td { vertical-align: middle; }
-    .hdr .brand-cell, .hdr .partner-cell { width: 50%; padding: 0 12px; }
-    .hdr .header-divider { width: 1px; border-left: 1px solid {$accent}; height: 70px; }
-    .hdr .brand-cell { text-align: left; }
-    .hdr .partner-cell { text-align: right; }
-    .hdr .brand-wrap img, .hdr .partner-wrap img { display: inline-block; vertical-align: middle; }
-    .company-name, .partner-name { font-size: 14pt; font-weight: 700; color: {$brand}; margin-top: 4px; }
-    .cin, .partner-sub { font-size: 8pt; color: #777; }
-    .partner-logo-placeholder { display: inline-block; padding: 8px 14px; border: 1px dashed #aaa; color: #777; font-size: 11pt; }
-
-    .title-area { text-align: center; margin: 18px 0 12px 0; }
-    .title-area .pre-title { font-size: 10pt; letter-spacing: 4px; color: {$accent}; text-transform: uppercase; }
-    .title-area .title {
-        font-family: DejaVu Serif, Georgia, serif; font-size: 30pt; font-weight: 800;
-        color: #1a1a1a; margin: 4px 0;
-    }
-    .title-area .underline {
-        display: inline-block; width: 200px; height: 3px;
-        background: linear-gradient(to right, transparent, {$brand}, transparent);
-        margin: 6px auto;
+    /* Fixed-size canvas matching A4 landscape exactly. No overflow → no page 2. */
+    .cert {
+        position: relative;
+        width: 297mm; height: 210mm;
+        background: {$cream};
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
-    .body { text-align: center; line-height: 1.6; }
-    .body .lead { font-size: 11pt; color: #555; margin: 8px 0 4px 0; }
-    .body .recipient {
-        font-family: DejaVu Serif, Georgia, serif; font-style: italic; font-weight: 700;
-        font-size: 26pt; color: {$brand}; margin: 6px 0 10px 0; letter-spacing: 0.5px;
+    /* Layered decorative borders */
+    .border-1 { position: absolute; left: 10mm; right: 10mm; top: 10mm; bottom: 10mm;
+                border: 5px solid {$brandDk}; border-radius: 4px; }
+    .border-2 { position: absolute; left: 13mm; right: 13mm; top: 13mm; bottom: 13mm;
+                border: 1px solid {$gold}; }
+    .border-3 { position: absolute; left: 15mm; right: 15mm; top: 15mm; bottom: 15mm;
+                border: 1px solid {$gold}; }
+
+    /* CSS-only corner ornaments — L-bracket lines + gold diamond dot */
+    .cnr { position: absolute; width: 26px; height: 26px; z-index: 3; }
+    .cnr-tl { left: 10mm; top: 10mm; }
+    .cnr-tr { right: 10mm; top: 10mm; }
+    .cnr-bl { left: 10mm; bottom: 10mm; }
+    .cnr-br { right: 10mm; bottom: 10mm; }
+    .cnr-l-h { position: absolute; width: 18px; height: 2px; background: {$gold}; }
+    .cnr-l-v { position: absolute; width: 2px;  height: 18px; background: {$gold}; }
+    .cnr-dot {
+        position: absolute; width: 6px; height: 6px;
+        background: {$brandDk}; transform: rotate(45deg);
+        border: 1px solid {$gold};
     }
-    .body .body { font-size: 11pt; color: #222; max-width: 560px; margin: 6px auto; }
-    .body strong { color: #111; }
 
-    /* Signatures */
-    .sigs { margin-top: 28px; }
-    .sigs table { width: 100%; border-collapse: collapse; }
-    .sigs td { vertical-align: top; padding: 0 16px; text-align: center; }
-    .sigs .sig-line { height: 30px; display: block; }
-    .sigs .sig-line img { max-height: 30px; }
-    .sigs .name-line { border-top: 1px solid #444; padding-top: 4px; margin: 0 18px; }
-    .sigs .name { font-weight: 700; font-size: 11pt; color: #111; }
-    .sigs .role { font-size: 9pt; color: #555; }
+    /* All content lives in this safe zone — guaranteed inside the inner border. */
+    .content {
+        position: absolute;
+        left: 22mm; right: 22mm; top: 20mm; bottom: 20mm;
+        text-align: center;
+    }
 
-    /* Stamp */
-    .stamp-wrap { position: absolute; right: 60mm; bottom: 28mm; opacity: 0.92; }
-    .stamp-wrap img { max-height: 95px; }
+    /* Header strip */
+    .hdr { width: 100%; border-collapse: collapse; }
+    .hdr td { vertical-align: middle; padding: 0 14px; }
+    .hdr .brand-cell, .hdr .partner-cell { width: 47%; text-align: center; }
+    .hdr .hdr-divider { width: 6%; }
+    .hdr .hdr-divider::before { content: '⬥'; color: {$gold}; font-size: 12pt; }
+    .hdr-solo { text-align: center; padding-top: 0; }
+    .hdr-solo img { vertical-align: middle; margin-right: 10px; }
+    .company-name-solo { display: inline-block; font-size: 14pt; font-weight: 700; color: {$brandDk}; vertical-align: middle; letter-spacing: 0.3px; }
+    .brand-row { display: block; white-space: nowrap; }
+    .brand-row img { display: inline-block; vertical-align: middle; margin-right: 8px; }
+    .company-name { display: inline-block; font-size: 12.5pt; font-weight: 700; color: {$brandDk}; vertical-align: middle; letter-spacing: 0.3px; }
+    .cin { font-size: 7.5pt; color: #888; letter-spacing: 0.5px; margin-top: 3px; }
 
-    /* QR */
-    .qr { position: absolute; left: 20mm; bottom: 22mm; text-align: center; }
-    .qr img { width: 80px; height: 80px; }
-    .qr-label { font-size: 7.5pt; color: #555; margin-top: 2px; }
-    .qr-label .ref { font-family: DejaVu Sans Mono, monospace; font-size: 7pt; color: #111; }
+    /* Divider band between header and title */
+    .divider {
+        margin: 10px auto 6px auto;
+        width: 80mm; height: 1px; background: linear-gradient(90deg, transparent, {$gold}, transparent);
+        position: relative;
+    }
+    .divider::before, .divider::after {
+        content: ''; position: absolute; top: -3px; width: 7px; height: 7px;
+        background: {$gold}; transform: rotate(45deg);
+    }
+    .divider::before { left: 50%; margin-left: -3.5px; }
 
-    /* Footer ribbon */
-    .footer { position: absolute; left: 18mm; right: 18mm; bottom: 12mm; text-align: center; font-size: 7.5pt; color: #888; }
-    .footer .verify-line { font-family: DejaVu Sans Mono, monospace; font-size: 7pt; }
+    /* Title block */
+    .pre-title {
+        font-family: DejaVu Sans, sans-serif;
+        font-size: 8.5pt; letter-spacing: 6px;
+        color: {$gold}; text-transform: uppercase;
+        margin-top: 4px;
+    }
+    .title {
+        font-family: DejaVu Serif, Georgia, serif;
+        font-size: 36pt; font-weight: 800;
+        color: #1a1a1a;
+        margin: 6px 0 4px 0;
+        letter-spacing: 1px;
+    }
+    .title-rule {
+        display: block; width: 60mm; height: 2px;
+        background: {$brandDk};
+        margin: 4px auto 0 auto;
+        position: relative;
+    }
+    .title-rule::after {
+        content: ''; position: absolute; top: -3px; left: 50%; margin-left: -4px;
+        width: 8px; height: 8px; background: {$gold}; transform: rotate(45deg);
+    }
+
+    /* Body — paragraph classes that templates use (.lead / .recipient / .body) */
+    .body-wrap { max-width: 220mm; margin: 10px auto 0 auto; }
+    .body-wrap p { margin: 4px 0; line-height: 1.5; }
+    .body-wrap .lead {
+        font-size: 9.5pt; color: #5a5a5a; letter-spacing: 1.8px;
+        text-transform: uppercase; margin: 6px 0 2px 0;
+    }
+    .body-wrap .recipient {
+        font-family: DejaVu Serif, Georgia, serif;
+        font-style: italic; font-weight: 700;
+        font-size: 34pt; color: {$brandDk};
+        margin: 4px 0 0 0; letter-spacing: 1px;
+        line-height: 1.15;
+    }
+    /* Delicate gold rule beneath the recipient name with a centered diamond */
+    .body-wrap .recipient + .body, .body-wrap .recipient { /* anchor for diamond */ }
+    .recipient-wrap { position: relative; padding-bottom: 12px; }
+    .recipient-wrap::after {
+        content: ''; position: absolute; left: 50%; bottom: 4px;
+        width: 80mm; height: 1px;
+        background: {$gold};
+        margin-left: -40mm;
+    }
+    .body-wrap .body {
+        font-size: 10.5pt; color: #2a2a2a; line-height: 1.55;
+        margin: 4px auto; max-width: 175mm;
+    }
+    .body-wrap strong { color: #111; font-weight: 700; }
+    .body-wrap em { color: {$brandDk}; font-style: normal; font-weight: 600; }
+
+    /* Decorative break between body and signature */
+    .ornament-break {
+        text-align: center; margin: 14px 0 8px 0;
+    }
+    .ornament-break .swash {
+        display: inline-block; height: 1px; width: 30mm; background: {$gold};
+        vertical-align: middle; margin: 0 8px;
+    }
+    .ornament-break .dot {
+        display: inline-block; width: 6px; height: 6px;
+        background: {$brandDk}; transform: rotate(45deg);
+        vertical-align: middle; margin: 0 2px;
+    }
+    .ornament-break .dot-gold { background: {$gold}; }
+
+    /* Signatures — tighter, closer to the body */
+    .sig-block { margin: 6mm auto 0 auto; }
+    .sigs { width: 75%; border-collapse: collapse; margin: 0 auto; }
+    .sigs td { width: 50%; text-align: center; padding: 0 24px; vertical-align: bottom; }
+    .sig-single { text-align: center; }
+    .sig-line, .sig-line-solo {
+        border-top: 1px solid #2a2a2a;
+        margin: 4px 12mm 4px 12mm;
+    }
+    .sig-line-solo { margin: 4px 60mm 4px 60mm; }
+    .sig-name { font-weight: 700; font-size: 10.5pt; color: #111; letter-spacing: 0.4px; margin-top: 4px; }
+    .sig-role { font-size: 8.5pt; color: #666; margin-top: 1px; letter-spacing: 0.2px; }
+    .sig-blank { display: inline-block; height: 36px; }
+
+    /* Stamp — bottom right, semi-transparent */
+    .stamp {
+        position: absolute; right: 28mm; bottom: 8mm;
+        opacity: 0.88;
+    }
+
+    /* QR — bottom left */
+    .qr {
+        position: absolute; left: 28mm; bottom: 8mm;
+        text-align: center;
+    }
+    .qr img { width: 22mm; height: 22mm; }
+    .qr-label { font-size: 6.5pt; color: #555; margin-top: 2px; line-height: 1.2; }
+    .qr-label .ref { font-family: DejaVu Sans Mono, monospace; font-size: 6.5pt; color: #111; }
+
+    /* Tiny verification footer at the very bottom centerline */
+    .verify-foot {
+        position: absolute; left: 0; right: 0; bottom: 4mm;
+        text-align: center; font-size: 6.5pt; color: #999;
+    }
+    .verify-foot .url { font-family: DejaVu Sans Mono, monospace; font-size: 6.5pt; color: #666; }
 </style>
 </head>
 <body>
 
-<div class="page">
-    <div class="border-outer"></div>
-    <div class="border-inner"></div>
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+<div class="cert">
+    <div class="border-1"></div>
+    <div class="border-2"></div>
+    <div class="border-3"></div>
+
+    {$cornerHtml('tl')}
+    {$cornerHtml('tr')}
+    {$cornerHtml('bl')}
+    {$cornerHtml('br')}
 
     <div class="content">
         {$headerHtml}
 
-        <div class="title-area">
-            <div class="pre-title">Voldebug Innovations · Awarded by</div>
-            <div class="title">{$title}</div>
-            <div class="underline"></div>
-        </div>
+        <div class="divider"></div>
 
-        <div class="body">
+        <div class="pre-title">{$company} · Awarded by</div>
+        <div class="title">{$title}</div>
+        <span class="title-rule"></span>
+
+        <div class="body-wrap">
             {$body}
         </div>
 
-        {$signaturesHtml}
+        <div class="ornament-break">
+            <span class="swash"></span>
+            <span class="dot dot-gold"></span>
+            <span class="dot"></span>
+            <span class="dot dot-gold"></span>
+            <span class="swash"></span>
+        </div>
+
+        <div class="sig-block">
+            {$signaturesHtml}
+        </div>
     </div>
 
     {$qrHtml}
-    <div class="stamp-wrap">{$stampImg}</div>
+    {$stampHtml}
 
-    <div class="footer">
-        Authenticity-verifiable at the URL below · system-generated certificate<br>
-        <span class="verify-line">{$verify}</span>
+    <div class="verify-foot">
+        Authenticity verifiable at <span class="url">{$verify}</span>
     </div>
 </div>
 
