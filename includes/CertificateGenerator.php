@@ -451,22 +451,22 @@ class CertificateGenerator
     .sig-role { font-size: 8.5pt; color: #666; margin-top: 1px; letter-spacing: 0.2px; }
     .sig-blank { display: inline-block; height: 36px; }
 
-    /* Stamp — bottom right, semi-transparent */
+    /* Stamp — bottom right, INSIDE the inner border (which sits at 15mm from edge) */
     .stamp {
-        position: absolute; right: 28mm; bottom: 8mm;
+        position: absolute; right: 28mm; bottom: 19mm;
         opacity: 0.88;
     }
 
-    /* QR — bottom left */
+    /* QR — bottom left, INSIDE the inner border */
     .qr {
-        position: absolute; left: 28mm; bottom: 8mm;
+        position: absolute; left: 28mm; bottom: 19mm;
         text-align: center;
     }
-    .qr img { width: 22mm; height: 22mm; }
+    .qr img { width: 20mm; height: 20mm; display: block; }
     .qr-label { font-size: 6.5pt; color: #555; margin-top: 2px; line-height: 1.2; }
     .qr-label .ref { font-family: DejaVu Sans Mono, monospace; font-size: 6.5pt; color: #111; }
 
-    /* Tiny verification footer at the very bottom centerline */
+    /* Tiny verification footer — sits in the strip BELOW all three borders, clear of the frame */
     .verify-foot {
         position: absolute; left: 0; right: 0; bottom: 4mm;
         text-align: center; font-size: 6.5pt; color: #999;
