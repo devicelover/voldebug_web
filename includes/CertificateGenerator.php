@@ -273,7 +273,20 @@ class CertificateGenerator
             ? '<div class="qr"><img src="' . $qrDataUri . '" alt="Verify"><div class="qr-label">Scan to verify<br><span class="ref">VDB-' . htmlspecialchars(substr($token, 0, 10)) . '</span></div></div>'
             : '';
 
-        $stampHtml = $stampImg ? '<div class="stamp">' . $stampImg . '</div>' : '';
+        // Gold seal medallion — embossed-look "official" mark. Used as the default when
+        // no real stamp is uploaded. Skipped on 3-sig layouts where it would collide.
+        $sealHtml = '';
+        if (!$stampImg && count($sigCols) <= 2) {
+            $sealHtml = '<div class="seal">'
+                . '<div class="seal-outer"></div>'
+                . '<div class="seal-mid"></div>'
+                . '<div class="seal-inner"></div>'
+                . '<div class="seal-top">OFFICIAL</div>'
+                . '<div class="seal-mono">VDB</div>'
+                . '<div class="seal-bot">CERTIFIED</div>'
+                . '</div>';
+        }
+        $stampHtml = $stampImg ? '<div class="stamp">' . $stampImg . '</div>' : $sealHtml;
 
         // CSS-only corner ornament (dompdf SVG transforms are unreliable).
         // Each corner uses 4 small decorative lines + a gold diamond accent.
@@ -455,6 +468,43 @@ class CertificateGenerator
     .stamp {
         position: absolute; right: 28mm; bottom: 19mm;
         opacity: 0.88;
+    }
+
+    /* Gold seal medallion — embossed-look "official" mark used when no uploaded stamp */
+    .seal {
+        position: absolute; right: 24mm; bottom: 22mm;
+        width: 22mm; height: 22mm; z-index: 4; opacity: 0.95;
+    }
+    .seal-outer {
+        position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+        border: 1.5px solid {$gold}; border-radius: 50%;
+        background: #f3e4b6;
+    }
+    .seal-mid {
+        position: absolute; left: 1.5mm; right: 1.5mm; top: 1.5mm; bottom: 1.5mm;
+        border: 1px solid {$gold}; border-radius: 50%;
+        background: #fbf3d8;
+    }
+    .seal-inner {
+        position: absolute; left: 3.5mm; right: 3.5mm; top: 3.5mm; bottom: 3.5mm;
+        border: 1px solid {$brandDk}; border-radius: 50%;
+        background: #fff8e6;
+    }
+    .seal-mono {
+        position: absolute; left: 0; right: 0; top: 8mm; text-align: center;
+        font-family: DejaVu Serif, Georgia, serif;
+        font-size: 11pt; font-weight: 800;
+        color: {$brandDk}; letter-spacing: 1px;
+    }
+    .seal-top {
+        position: absolute; left: 0; right: 0; top: 3mm; text-align: center;
+        font-size: 4pt; letter-spacing: 1.5px;
+        color: {$gold}; font-weight: 700;
+    }
+    .seal-bot {
+        position: absolute; left: 0; right: 0; bottom: 3mm; text-align: center;
+        font-size: 4pt; letter-spacing: 1.5px;
+        color: {$gold}; font-weight: 700;
     }
 
     /* QR — bottom left, INSIDE the inner border */
