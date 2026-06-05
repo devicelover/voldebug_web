@@ -93,6 +93,20 @@
 
                 <li>
                     <a class="has-arrow waves-effect">
+                        <i class="mdi mdi-certificate-outline"></i>
+                        <span>E-Certificates</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="hr_certificates.php">All Certificates</a></li>
+                        <li><a href="hr_certificate_generate.php">+ Generate Single</a></li>
+                        <li><a href="hr_certificate_bulk.php">⬆ Bulk Upload</a></li>
+                        <li><a href="hr_certificate_templates.php">Templates</a></li>
+                        <li><a href="hr_certificate_partners.php">Partner Institutes</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow waves-effect">
                         <i class="mdi mdi-chart-line"></i>
                         <span>SEO / Marketing</span>
                     </a>
