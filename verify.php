@@ -20,7 +20,7 @@ if ($token !== '' && preg_match('/^[A-Za-z0-9_-]{10,96}$/', $token)) {
     // Then try certificates_issued
     if (!$record) {
         $stmt = $con->prepare(
-            "SELECT c.*, t.title AS cert_title, t.cert_kind, p.name AS partner_name
+            "SELECT c.*, t.title AS cert_title, t.cert_kind, p.name AS partner_name, p.logo AS partner_logo
              FROM certificates_issued c
              JOIN certificate_templates t ON t.id = c.template_id
              LEFT JOIN certificate_partners p ON p.id = c.partner_id
@@ -35,6 +35,19 @@ if ($token !== '' && preg_match('/^[A-Za-z0-9_-]{10,96}$/', $token)) {
     elseif ((int) $record['revoked'] === 1) $revoked = true;
 } else {
     $notFound = true;
+}
+
+// Public PDF stream for verified certificates. Guarded — only serves the file that matches this token.
+if ($recordType === 'certificate' && !$notFound && !$revoked && isset($_GET['pdf'])) {
+    $abs = __DIR__ . '/' . ltrim($record['pdf_path'], '/');
+    if (is_file($abs)) {
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="certificate_VDB-' . substr($record['verify_token'], 0, 10) . '.pdf"');
+        header('Cache-Control: public, max-age=3600');
+        readfile($abs);
+        exit;
+    }
+    http_response_code(410); exit;
 }
 
 $company   = htmlspecialchars($APP_SETTINGS['name']               ?? 'Voldebug');
@@ -59,11 +72,25 @@ $pageTitle = $recordType === 'certificate' ? 'Certificate verification' : 'Docum
     .badge-bad  { background: #fde8ea; color: #a11a25; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 13px; }
     .badge-warn { background: #fff4d6; color: #7a5300; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 13px; }
     .card-body { padding: 24px; }
-    .kv { display: grid; grid-template-columns: 200px 1fr; gap: 10px 16px; }
+    .kv { display: grid; grid-template-columns: 180px 1fr; gap: 10px 16px; }
     .kv dt { color: #777; font-weight: 500; }
-    .kv dd { margin: 0; font-weight: 600; color: #111; }
+    .kv dd { margin: 0; font-weight: 600; color: #111; word-break: break-word; }
+    .actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .actions a { display: inline-block; padding: 9px 18px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    .actions .btn-pdf { background: #1a8f4a; color: #fff; }
+    .actions .btn-pdf:hover { background: #146c3a; }
+    .actions .btn-plain { background: #eef; color: #333; border: 1px solid #dde; }
     .foot { text-align: center; color: #888; font-size: 13px; margin-top: 18px; }
     h1 { font-size: 20px; margin: 0; }
+    @media (max-width: 560px) {
+        .wrap { margin: 20px auto; }
+        .card-hdr { padding: 14px 16px; }
+        .card-body { padding: 16px; }
+        h1 { font-size: 17px; }
+        .kv { grid-template-columns: 1fr; gap: 4px 0; }
+        .kv dt { font-size: 12px; margin-top: 6px; }
+        .kv dd { font-size: 15px; }
+    }
 </style>
 </head><body>
 <div class="wrap">
@@ -112,8 +139,11 @@ $pageTitle = $recordType === 'certificate' ? 'Certificate verification' : 'Docum
                     <?php if (!empty($record['completion_date'])): ?>
                         <dt>Completion date</dt><dd><?= htmlspecialchars(date('d M Y', strtotime($record['completion_date']))) ?></dd>
                     <?php endif; ?>
-                    <dt>Reference</dt><dd style="font-family:monospace; font-size:13px">VDB-<?= htmlspecialchars($record['verify_token']) ?></dd>
+                    <dt>Reference</dt><dd style="font-family:monospace; font-size:13px">VDB-<?= htmlspecialchars(substr($record['verify_token'], 0, 10)) ?></dd>
                 </dl>
+                <div class="actions">
+                    <a class="btn-pdf" href="?t=<?= urlencode($token) ?>&amp;pdf=1" target="_blank">View certificate PDF</a>
+                </div>
 
             <?php else: /* letter, authentic */ ?>
                 <p>This letter was genuinely issued by <?= $legalName ?>.</p>
@@ -122,7 +152,7 @@ $pageTitle = $recordType === 'certificate' ? 'Certificate verification' : 'Docum
                     <dt>Role</dt>      <dd><?= htmlspecialchars($record['role_snapshot']) ?></dd>
                     <dt>Letter type</dt><dd><?= htmlspecialchars(ucwords(str_replace('_', ' ', $record['letter_type']))) ?></dd>
                     <dt>Issue date</dt><dd><?= htmlspecialchars(date('d M Y', strtotime($record['issue_date']))) ?></dd>
-                    <dt>Reference</dt> <dd style="font-family:monospace; font-size:13px">VDB-<?= htmlspecialchars($record['verify_token']) ?></dd>
+                    <dt>Reference</dt> <dd style="font-family:monospace; font-size:13px">VDB-<?= htmlspecialchars(substr($record['verify_token'], 0, 10)) ?></dd>
                 </dl>
             <?php endif; ?>
         </div>

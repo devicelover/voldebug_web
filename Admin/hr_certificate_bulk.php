@@ -78,9 +78,11 @@ $msg = $_GET['msg'] ?? '';
                     </div>
                 </div>
 
+                <button type="submit" name="dry_run" value="1" class="btn btn-outline-info" title="Parse and validate the sheet without generating anything. Recommended before large batches.">🔍 Preview parsing</button>
                 <button type="submit" class="btn btn-primary">Process &amp; Generate</button>
                 <a href="hr_certificates.php" class="btn btn-outline-secondary">Back</a>
             </form>
+            <p class="text-muted mt-2" style="font-size:12px">Tip: click <strong>Preview parsing</strong> first to see column mapping, per-row validation, and duplicate detection — before committing to a full batch.</p>
             <?php endif; ?>
         </div></div>
 

@@ -82,9 +82,13 @@ class CertificateGenerator
             'guest_signatory'     => $input['guest_signatory'] ?? null,
         ];
 
+        // PDF body renders inside dompdf HTML — every scalar substitution MUST be html-escaped
+        // to prevent recipient names / course text / custom fields from injecting layout-breaking
+        // markup. Email body/subject stay raw because their consumers wrap with htmlspecialchars.
+        $safeVars = $this->htmlEscapeVars($vars);
         $bodyHtml     = function_exists('render_placeholders')
-            ? render_placeholders($template['body_html'],     $vars)
-            : strtr($template['body_html'],     $this->flatten($vars));
+            ? render_placeholders($template['body_html'],     $safeVars)
+            : strtr($template['body_html'],     $this->flatten($safeVars));
         $emailBody    = function_exists('render_placeholders')
             ? render_placeholders($template['email_body'],    $vars)
             : strtr($template['email_body'],    $this->flatten($vars));
@@ -110,7 +114,10 @@ class CertificateGenerator
 
         $filename = $token . '.pdf';
         $abs = rtrim($this->certsDir, '\\/') . DIRECTORY_SEPARATOR . $filename;
-        file_put_contents($abs, $pdf->output());
+        $bytes = file_put_contents($abs, $pdf->output());
+        if ($bytes === false || $bytes === 0) {
+            throw new RuntimeException('Certificate PDF write failed: ' . $abs);
+        }
         $relPath = 'Admin/certificates/' . $filename;
 
         $customJson = json_encode([
@@ -122,13 +129,6 @@ class CertificateGenerator
             'guest_signatory' => $input['guest_signatory'] ?? null,
         ]);
 
-        $stmt = $this->db->prepare(
-            "INSERT INTO certificates_issued
-                (verify_token, template_id, partner_id, batch_id, recipient_name, recipient_email,
-                 course_name, completion_date, duration, custom_fields,
-                 include_signature, include_stamp, pdf_path)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        );
         $tid = (int) $template['id'];
         $pid = $partner ? (int) $partner['id'] : null;
         $bid = $batchId !== null ? (int) $batchId : null;
@@ -141,8 +141,7 @@ class CertificateGenerator
         // Type string: s=token, i=tid, i=pid, i=bid,
         //              s=name, s=email, s=course, s=completionDate, s=duration, s=customJson,
         //              i=sig, i=stmp, s=relPath  → siiissssssiis (13 chars)
-        // Use the NULLIF form unconditionally — partner_id / batch_id default to 0 which becomes NULL.
-        $stmt->close();
+        // NULLIF form: partner_id / batch_id default to 0 which becomes NULL.
         $stmt = $this->db->prepare(
             "INSERT INTO certificates_issued
                 (verify_token, template_id, partner_id, batch_id, recipient_name, recipient_email,
@@ -178,6 +177,11 @@ class CertificateGenerator
 
     private function buildFullHtml(array $tpl, ?array $partner, string $body, array $vars, ?string $qrDataUri, string $token, bool $includeSig, bool $includeStamp): string
     {
+        // Long recipient names would wrap the giant italic recipient line onto two lines and
+        // push the signature block into the QR/seal row. Add a body class so CSS can shrink
+        // the recipient font in that case.
+        $nameLen  = mb_strlen((string)($vars['name'] ?? ''));
+        $bodyClass = $nameLen > 34 ? 'body-wrap long-name-xl' : ($nameLen > 26 ? 'body-wrap long-name' : 'body-wrap');
         $brand   = $this->settings['brand_color']  ?: '#1a8f4a';
         $brandDk = '#0f5a2e';                                   // darker shade for borders
         $gold    = '#b8924a';                                   // refined gold
@@ -417,6 +421,9 @@ class CertificateGenerator
         margin: 4px 0 0 0; letter-spacing: 1px;
         line-height: 1.15;
     }
+    /* Font-shrink cascade so 30+ char names still fit on one line */
+    .body-wrap.long-name    .recipient { font-size: 28pt; letter-spacing: 0.6px; }
+    .body-wrap.long-name-xl .recipient { font-size: 22pt; letter-spacing: 0.3px; }
     /* Delicate gold rule beneath the recipient name with a centered diamond */
     .body-wrap .recipient + .body, .body-wrap .recipient { /* anchor for diamond */ }
     .recipient-wrap { position: relative; padding-bottom: 12px; }
@@ -545,7 +552,7 @@ class CertificateGenerator
         <div class="title">{$title}</div>
         <span class="title-rule"></span>
 
-        <div class="body-wrap">
+        <div class="{$bodyClass}">
             {$body}
         </div>
 
@@ -618,6 +625,20 @@ HTML;
     {
         $out = [];
         foreach ($vars as $k => $v) $out['{{' . $k . '}}'] = (string) $v;
+        return $out;
+    }
+
+    /** HTML-escape every scalar value so it's safe to inject into the PDF HTML. Arrays pass through untouched. */
+    private function htmlEscapeVars(array $vars): array
+    {
+        $out = [];
+        foreach ($vars as $k => $v) {
+            if (is_string($v)) {
+                $out[$k] = htmlspecialchars($v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            } else {
+                $out[$k] = $v;
+            }
+        }
         return $out;
     }
 }

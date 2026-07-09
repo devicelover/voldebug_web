@@ -4,6 +4,7 @@ csrf_require();
 session_start();
 if (!isset($_SESSION["loggedin"])) { header("Location: auth-login.php"); exit; }
 require_once __DIR__ . '/partials/config.php';
+require_once __DIR__ . '/../includes/upload_safe.php';
 
 if (isset($_POST['delete_id'])) {
     $did = (int) $_POST['delete_id'];
@@ -15,17 +16,6 @@ if (isset($_POST['delete_id'])) {
 
 $dir = __DIR__ . '/images/cert_partners/';
 if (!is_dir($dir)) mkdir($dir, 0755, true);
-
-$allow = ['jpg','jpeg','png','gif','webp','svg'];
-function partner_upload(string $field, string $dir, array $allow, string $existing): string {
-    if (empty($_FILES[$field]['name'])) return $existing;
-    $ext = strtolower(pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION));
-    if (!in_array($ext, $allow, true)) return $existing;
-    $name = $field . '_' . time() . '_' . bin2hex(random_bytes(2)) . '.' . $ext;
-    if (!move_uploaded_file($_FILES[$field]['tmp_name'], $dir . $name)) return $existing;
-    if ($existing && is_file($dir . $existing)) @unlink($dir . $existing);
-    return $name;
-}
 
 $id           = (int) ($_POST['id'] ?? 0);
 $name         = trim($_POST['name'] ?? '');
@@ -41,8 +31,15 @@ if ($id > 0) {
     $r->bind_param('i', $id); $r->execute();
     if ($row = $r->get_result()->fetch_assoc()) $current = $row;
 }
-$logo    = partner_upload('logo',            $dir, $allow, $current['logo']);
-$sigImg  = partner_upload('signature_image', $dir, $allow, $current['signature_image']);
+$logoRes = safe_image_upload('logo',            $dir, $current['logo']);
+$sigRes  = safe_image_upload('signature_image', $dir, $current['signature_image']);
+$uploadErrors = array_filter([$logoRes['error'] ?? null, $sigRes['error'] ?? null]);
+if ($uploadErrors) {
+    header('Location: hr_certificate_partners.php?msg=' . urlencode('Upload rejected: ' . implode(' ', $uploadErrors)));
+    exit;
+}
+$logo   = $logoRes['name'];
+$sigImg = $sigRes['name'];
 
 if ($id > 0) {
     $stmt = $con->prepare("UPDATE certificate_partners SET name=?, subtitle=?, logo=?, website=?, signatory_name=?, signatory_designation=?, signature_image=?, is_active=? WHERE id=?");

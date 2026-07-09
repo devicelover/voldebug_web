@@ -68,6 +68,8 @@ $kinds = ['completion','participation','achievement','merit','custom'];
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save Template</button>
+                <button type="submit" formaction="hr_certificate_preview.php" formtarget="_blank" formnovalidate class="btn btn-outline-info" title="Render a preview with a sample recipient in a new tab.">👁 Preview</button>
+                <input type="hidden" name="mode" value="inline_template">
                 <a href="hr_certificate_templates.php" class="btn btn-outline-secondary">Back</a>
             </form>
         </div></div>

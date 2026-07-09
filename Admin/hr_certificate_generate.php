@@ -58,6 +58,8 @@ $msg = $_GET['msg'] ?? '';
                     <div class="col-md-4 form-group"><label>Custom 1</label><input type="text" name="custom1" class="form-control" placeholder="e.g. Grade A+"></div>
                     <div class="col-md-4 form-group"><label>Custom 2</label><input type="text" name="custom2" class="form-control"></div>
                     <div class="col-md-4 form-group"><label>Custom 3</label><input type="text" name="custom3" class="form-control"></div>
+                    <div class="col-md-6 form-group"><label>Custom 4</label><input type="text" name="custom4" class="form-control"></div>
+                    <div class="col-md-6 form-group"><label>Custom 5</label><input type="text" name="custom5" class="form-control"></div>
                 </div>
 
                 <div class="form-group">
@@ -84,6 +86,7 @@ $msg = $_GET['msg'] ?? '';
                 </div>
 
                 <button type="submit" class="btn btn-primary">Generate Certificate</button>
+                <button type="submit" formaction="hr_certificate_preview.php" formtarget="_blank" class="btn btn-outline-info" title="Render a preview in a new tab — does not save or email anything.">👁 Preview</button>
                 <a href="hr_certificates.php" class="btn btn-outline-secondary">Cancel</a>
             </form>
         </div></div>

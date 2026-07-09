@@ -62,7 +62,9 @@ $res = $mailer->send(
 );
 
 if ($res['ok']) {
-    $con->query("UPDATE certificates_issued SET emailed_at = NOW() WHERE id = " . $id);
+    $upd = $con->prepare("UPDATE certificates_issued SET emailed_at = NOW() WHERE id = ?");
+    $upd->bind_param('i', $id);
+    $upd->execute();
     $msg = "Certificate emailed to {$row['recipient_email']}.";
 } else {
     $msg = "Email failed: {$res['error']}";
